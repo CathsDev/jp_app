@@ -1,52 +1,57 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-/// Flutter code sample for [DropdownButton].
-
-const List<String> list = <String>['Salty', 'Sweet', 'Drinks'];
-
-void main() => runApp(const DropdownButtonApp());
-
-class DropdownButtonApp extends StatelessWidget {
-  const DropdownButtonApp({super.key});
+class DropdownButtonFake extends StatelessWidget {
+  const DropdownButtonFake({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('DropdownButton Sample')),
-        body: const Center(child: DropdownButtonExample()),
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 42, maxWidth: 150),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.05),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.4),
+                width: 1,
+              ),
+            ),
+            child: FilledButton(
+              onPressed: () {},
+              style: FilledButton.styleFrom(
+                shape: const StadiumBorder(),
+                backgroundColor: Colors.transparent,
+                foregroundColor: Color(0x50FFFFFF),
+
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                elevation: 0,
+                shadowColor: Colors.transparent,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.folder_open_rounded),
+                  const SizedBox(width: 4),
+                  Text(
+                    'All categories',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Icon(Icons.expand_more),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
-    );
-  }
-}
-
-class DropdownButtonExample extends StatefulWidget {
-  const DropdownButtonExample({super.key});
-
-  @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
-}
-
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-  String dropdownValue = list.first;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(height: 2, color: Colors.deepPurpleAccent),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-        });
-      },
-      items: list.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList(),
     );
   }
 }

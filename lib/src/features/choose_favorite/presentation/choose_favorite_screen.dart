@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jp_app/src/features/choose_favorite/presentation/categorie_button.dart';
+import 'package:jp_app/src/features/choose_favorite/presentation/dropdown_button.dart';
 import 'package:jp_app/src/shared/widgets/glowing_button.dart';
 
 class ChooseFavoriteScreen extends StatefulWidget {
@@ -54,73 +56,7 @@ class _ChooseFavoriteScreenState extends State<ChooseFavoriteScreen> {
                     child: Row(
                       spacing: 10,
                       children: [
-                        /* DropdownButton(
-                          items: list.map<DropdownMenuItem<String>>((
-                            String value,
-                          ) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            // This is called when the user selects an item.
-                            setState(() {
-                              dropdownValue = value!;
-                            });
-                          },
-                        ), */
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxHeight: 42,
-                            maxWidth: 150,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withValues(alpha: 0.05),
-                                  borderRadius: BorderRadius.circular(30),
-                                  border: Border.all(
-                                    color: Colors.white.withValues(alpha: 0.4),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: FilledButton(
-                                  onPressed: () {},
-                                  style: FilledButton.styleFrom(
-                                    shape: const StadiumBorder(),
-                                    backgroundColor: Colors.transparent,
-                                    foregroundColor: Color(0x50FFFFFF),
-
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 14,
-                                    ),
-                                    elevation: 0,
-                                    shadowColor: Colors.transparent,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(Icons.folder_open_rounded),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        'All categories',
-                                        style: TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Icon(Icons.expand_more),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        DropdownButtonFake(),
                         ConstrainedBox(
                           constraints: BoxConstraints(
                             minWidth: 90,
@@ -162,44 +98,7 @@ class _ChooseFavoriteScreenState extends State<ChooseFavoriteScreen> {
                             ),
                           ),
                         ),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(minWidth: 90),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                              child: FilledButton(
-                                onPressed: () {},
-                                style: FilledButton.styleFrom(
-                                  shape: const StadiumBorder(),
-                                  backgroundColor: Colors.white.withValues(
-                                    alpha: 0.1,
-                                  ), // transparenter Hintergrund
-                                  foregroundColor: Colors.white.withValues(
-                                    alpha: 0.4,
-                                  ), // Text- und Iconfarbe
-                                  side: BorderSide(
-                                    color: Colors.white.withValues(
-                                      alpha: 0.4,
-                                    ), // weißer Rahmen
-                                    width: 1,
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                    vertical: 12,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Sweet',
-                                  style: TextStyle(
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        CategorieButton(),
                         ConstrainedBox(
                           constraints: BoxConstraints(minWidth: 90),
                           child: ClipRRect(
@@ -284,45 +183,269 @@ class _ChooseFavoriteScreenState extends State<ChooseFavoriteScreen> {
                       ),
                     ),
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                      child: Container(
-                        width: 200,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.01),
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.1),
-                            width: 1.5,
-                          ),
+                  SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'We Recommend',
+                        style: GoogleFonts.inter(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
                         ),
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
+                      ),
+                      SizedBox(height: 16),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          spacing: 24,
                           children: [
-                            Text(
-                              "Feeling",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.inter(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
+                            ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: 200),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 20,
+                                    sigmaY: 20,
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color.fromARGB(45, 255, 255, 255),
+                                          Color(0xcc908cf5),
+                                          Color(0xcc8c5bea),
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                      border: Border.all(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/cupkake_cat.png',
+                                          height: 160,
+                                        ),
+                                        SizedBox(height: 12),
+                                        Text(
+                                          "Mogli’s Cup",
+                                          style: GoogleFonts.inter(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const Text(
+                                          "Strawberry ice cream",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '₳ 8.99',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.favorite_border,
+                                                  size: 13,
+                                                  color: Colors.white
+                                                      .withValues(alpha: 0.5),
+                                                ),
+                                                SizedBox(width: 4),
+                                                Text(
+                                                  '200',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.white
+                                                        .withValues(alpha: 0.5),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            const Text(
-                              "Explore Angi's most popular snack selection and get instantly happy.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white70),
+                            ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: 200),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 20,
+                                    sigmaY: 20,
+                                  ),
+                                  child: Container(
+                                    padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color.fromARGB(45, 255, 255, 255),
+                                          Color(0xcc908cf5),
+                                          Color(0xcc8c5bea),
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                      border: Border.all(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/icecream.png',
+                                          height: 160,
+                                        ),
+                                        SizedBox(height: 12),
+                                        Text(
+                                          "Balu’s Cup",
+                                          style: GoogleFonts.inter(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const Text(
+                                          "Pistachio ice cream",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '₳ 8.99',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.favorite_border,
+                                                  size: 13,
+                                                  color: Colors.white
+                                                      .withValues(alpha: 0.5),
+                                                ),
+                                                SizedBox(width: 4),
+                                                Text(
+                                                  '165',
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.white
+                                                        .withValues(alpha: 0.5),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                            const SizedBox(height: 30),
-                            GlowingButton(),
                           ],
                         ),
                       ),
-                    ),
+                      /* Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                              child: Container(
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.01),
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.1),
+                                    width: 1.5,
+                                  ),
+                                ),
+                                padding: const EdgeInsets.all(24),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/cupkake_cat.png',
+                                    ),
+                                    Text(
+                                      "Mogli’s Cup",
+                                      style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    const Text(
+                                      "Strawberry ice cream",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white70,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 30),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [Text('8,99'), Text('200')],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ), */
+                    ],
                   ),
                 ],
               ),
