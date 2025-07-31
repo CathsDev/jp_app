@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jp_app/src/shared/widgets/glowing_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,21 +28,20 @@ class HomeScreen extends StatelessWidget {
             child: Image.asset(
               'assets/details/snack_snack.png',
               scale: 0.95,
-              color: const Color.fromRGBO(255, 255, 255, 0.3),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
           ),
-
           Positioned(
             left: 25,
             right: 25,
-            bottom: 90, // Abstand zum unteren Bildschirmrand
+            bottom: 90,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.1),
+                    color: Colors.white.withValues(alpha: 0.01),
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
                       color: Colors.white.withValues(alpha: 0.1),
@@ -68,43 +68,7 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.white70),
                       ),
                       const SizedBox(height: 30),
-                      Center(
-                        child: Material(
-                          //color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(16),
-                          child: InkWell(
-                            onTap: () {
-                              // Button
-                            },
-                            borderRadius: BorderRadius.circular(16),
-                            child: Ink(
-                              width: 220,
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color(0xFFe970c4),
-                                    Color(0xFFf69ea3),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Order Now',
-                                  style: GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      GlowingButton(),
                     ],
                   ),
                 ),
