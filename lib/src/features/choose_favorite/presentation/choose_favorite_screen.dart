@@ -137,7 +137,9 @@ class _ChooseFavoriteScreenState extends State<ChooseFavoriteScreen> {
                       ],
                     ),
                   ),
-                  FavoriteCard(),
+                  SizedBox(height: 45),
+                  SizedBox(height: 300, width: 370, child: FavoriteCard()),
+
                   SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
