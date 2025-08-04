@@ -16,9 +16,9 @@ class _SingleChoiceState extends State<SingleChoice> {
   Widget build(BuildContext context) {
     return SegmentedButton<Calendar>(
       segments: const <ButtonSegment<Calendar>>[
-        ButtonSegment<Calendar>(value: Calendar.day, label: Text('Day')),
-        ButtonSegment<Calendar>(value: Calendar.week, label: Text('Week')),
-        ButtonSegment<Calendar>(value: Calendar.month, label: Text('Month')),
+        ButtonSegment<Calendar>(value: Calendar.day, label: Text('Small')),
+        ButtonSegment<Calendar>(value: Calendar.week, label: Text('Medium')),
+        ButtonSegment<Calendar>(value: Calendar.month, label: Text('Large')),
       ],
       selected: <Calendar>{calendarView},
       onSelectionChanged: (Set<Calendar> newSelection) {
