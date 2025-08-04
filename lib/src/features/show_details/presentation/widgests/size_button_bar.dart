@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum Calendar { day, week, month, year }
+enum Size { small, medium, large }
 
 class SingleChoice extends StatefulWidget {
   const SingleChoice({super.key});
@@ -10,25 +10,37 @@ class SingleChoice extends StatefulWidget {
 }
 
 class _SingleChoiceState extends State<SingleChoice> {
-  Calendar calendarView = Calendar.day;
+  Size calendarView = Size.large;
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<Calendar>(
-      segments: const <ButtonSegment<Calendar>>[
-        ButtonSegment<Calendar>(value: Calendar.day, label: Text('Small')),
-        ButtonSegment<Calendar>(value: Calendar.week, label: Text('Medium')),
-        ButtonSegment<Calendar>(value: Calendar.month, label: Text('Large')),
+    return SegmentedButton<Size>(
+      segments: const <ButtonSegment<Size>>[
+        ButtonSegment<Size>(
+          value: Size.small,
+          label: Text('Small', style: TextStyle(fontSize: 11)),
+        ),
+        ButtonSegment<Size>(
+          value: Size.medium,
+          label: Text('Medium', style: TextStyle(fontSize: 11)),
+        ),
+        ButtonSegment<Size>(
+          value: Size.large,
+          label: Text('Large', style: TextStyle(fontSize: 11)),
+        ),
       ],
-      selected: <Calendar>{calendarView},
-      onSelectionChanged: (Set<Calendar> newSelection) {
+      selected: <Size>{calendarView},
+      onSelectionChanged: (Set<Size> newSelection) {
         setState(() {
-          // By default there is only a single segment that can be
-          // selected at one time, so its value is always the first
-          // item in the selected set.
           calendarView = newSelection.first;
         });
       },
+      showSelectedIcon: false,
+      style: ButtonStyle(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+      ),
     );
   }
 }

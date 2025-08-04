@@ -59,7 +59,10 @@ class RecommendCard extends StatelessWidget {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                           ),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(top: 200),
